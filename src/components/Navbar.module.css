@@ -1,0 +1,466 @@
+/* Navbar.module.css */
+
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.96);
+  --nav-bg-dark: rgba(20, 25, 36, 0.96);
+  --nav-text: #1a1a1a;
+  --nav-text-dark: #f7f9fc;
+  --accent-color: #007acc;
+  --accent-hover: #00a1ff;
+  --transition-speed: 0.4s;
+  --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Navbar.module.css */
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 60px; /* Adjust based on your signature height */
+  transition: opacity 0.3s ease;
+}
+
+.signatureLogo {
+  height: 100%;
+  width: auto;
+  max-width: 180px; /* Adjust based on your signature width */
+  transition: all 0.3s ease;
+}
+
+.logo:hover .signatureLogo {
+  opacity: 0.8;
+  transform: translateX(3px);
+}
+
+/* For dark mode support */
+.dark .signatureLogo {
+  filter: brightness(0) invert(1); /* Makes signature white in dark mode */
+}
+
+/* Base Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  transition: all var(--transition-speed) var(--easing);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dark .navbar {
+  background-color: var(--nav-bg-dark);
+  color: var(--nav-text-dark);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.scrolled {
+  padding: 0.6rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Container Layout */
+.navContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: all var(--transition-speed) var(--easing);
+  color: inherit;
+  position: relative;
+  z-index: 1001;
+  text-decoration: none; /* Remove underline */
+}
+
+.logoText {
+  transition: transform var(--transition-speed) var(--easing);
+}
+
+.logo:hover .logoText {
+  transform: translateX(5px);
+}
+
+.logoIcon {
+  transition: all 0.6s var(--easing);
+  display: inline-block;
+}
+
+.logo:hover .logoIcon {
+  transform: rotate(180deg) scale(1.2);
+}
+
+/* Navigation Right Section */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Navigation Links */
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  text-decoration: none; /* Remove underline */
+}
+
+.navIcon {
+  font-size: 1.1em;
+  transition: transform var(--transition-speed) var(--easing);
+}
+
+/* Link Hover Effect */
+.linkHover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+  transform: translateX(-110%);
+  transition: transform var(--transition-speed) var(--easing);
+}
+
+.navLink:hover .linkHover {
+  transform: translateX(0);
+}
+
+.navLink:hover .navIcon {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.navText {
+  position: relative;
+  transition: color var(--transition-speed) var(--easing);
+}
+
+.navLink:hover .navText {
+  color: var(--accent-color);
+}
+
+/* Active Link Styles */
+.navLink.active {
+  color: var(--accent-color);
+}
+
+.navLink.active .navIcon {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.navLink.active .linkHover {
+  transform: translateX(0);
+}
+
+/* Link Pulse Animation */
+.linkPulse {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-hover);
+  transform: scaleX(0);
+  opacity: 0;
+  transition: all 0.6s var(--easing);
+}
+
+.navLink.active .linkPulse {
+  animation: pulse 2s infinite var(--easing);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleX(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleX(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scaleX(0.8);
+    opacity: 0.6;
+  }
+}
+
+/* Ripple Effect */
+.navLink::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(0, 122, 204, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.navLink:active::before {
+  transform: translate(-50%, -50%) scale(15);
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+/* Background Gradient Effect */
+.navLink::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 122, 204, 0.1) 0%,
+    rgba(0, 122, 204, 0) 100%
+  );
+  transform: translateY(100%);
+  transition: transform 0.4s var(--easing);
+  z-index: -1;
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+  transform: translateY(0);
+}
+
+/* Theme Toggle */
+.themeToggle {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Remove underline */
+}
+
+.themeIcon {
+  font-size: 1.4rem;
+  transition: all var(--transition-speed) var(--easing);
+}
+
+.themeTooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-speed) var(--easing);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark .themeTooltip {
+  background: var(--nav-bg-dark);
+  color: var(--nav-text-dark);
+}
+
+.themeToggle:hover .themeIcon {
+  transform: scale(1.2) rotate(15deg);
+}
+
+.themeToggle:hover .themeTooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(10px);
+}
+
+/* Burger Menu */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  background: transparent;
+  border: none;
+  padding: 0;
+  position: relative;
+}
+
+.burgerLine {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--nav-text);
+  transition: all 0.5s var(--easing);
+  transform-origin: center;
+}
+
+.dark .burgerLine {
+  background-color: var(--nav-text-dark);
+}
+
+.burger.open .burgerLine:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.burger.open .burgerLine:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.burger.open .burgerLine:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .scrolled {
+    padding: 0.7rem 1rem;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(75vw, 300px);
+    height: 100vh;
+    background-color: var(--nav-bg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s var(--easing);
+    z-index: 1000;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .navLinks {
+    background-color: var(--nav-bg-dark);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .showMenu {
+    transform: translateX(0);
+  }
+
+  .navLink {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s var(--easing);
+  }
+
+  .showMenu .navLink {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .themeToggle {
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+
+  /* Mobile Menu Backdrop */
+  .navLinks::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .showMenu.navLinks::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Focus States for Accessibility */
+.navLink:focus-visible,
+.themeToggle:focus-visible,
+.burger:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Initial Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: fadeIn 0.8s var(--easing) forwards;
+}

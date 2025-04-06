@@ -1,0 +1,82 @@
+.footer {
+  background-color: var(--bg, #f9fafb);
+  color: var(--text, #1f2937);
+  padding: 2.5rem 1rem;
+  border-top: 1px solid #e5e7eb;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.credit {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #4f46e5;
+  left: 0;
+  bottom: -4px;
+  transition: width 0.3s ease;
+}
+
+.links a:hover {
+  color: #4f46e5;
+  transform: translateY(-2px);
+}
+
+.links a:hover::after {
+  width: 100%;
+}
+
+.copy {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* 🌙 Dark Mode Support */
+body.dark .footer {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+  border-top-color: #333;
+}
+
+body.dark .links a {
+  color: #e0e0e0;
+}
+
+body.dark .links a:hover {
+  color: #66b2ff;
+}
+
+body.dark .links a::after {
+  background-color: #66b2ff;
+}
