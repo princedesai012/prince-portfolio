@@ -27,7 +27,7 @@ const About = () => {
         <div className={styles.introSection}>
           <div className={styles.profileWrapper}>
             <img
-              src="/prince-avatar.jpg"
+              src="/prince-avatar.jfif"
               alt="Prince Desai"
               className={styles.profileImg}
             />
